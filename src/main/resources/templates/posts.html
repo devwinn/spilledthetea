@@ -1,0 +1,21 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+
+
+    <div class="">
+
+        <div id="posts-container" class="col-md-8 blog-main">
+            <div>
+                <div class="" th:each="post: ${listPosts}">
+                    <h2 class="" th:text="${post.heading}"></h2>
+                    <p class="" th:text="${post.user.userName}"></p>
+                    <p th:text="${post.content}"></p>
+                </div>
+            </div>
+        </div>
+
+
+</div>
+</body>
+</html>
