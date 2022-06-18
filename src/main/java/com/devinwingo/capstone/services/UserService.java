@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Transactional(rollbackOn = {DataAccessException.class})
 public class UserService {
     PostRepository postRepository;
