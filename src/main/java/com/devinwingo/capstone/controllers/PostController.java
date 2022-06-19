@@ -14,6 +14,10 @@ public class PostController {
         this.postService = postService;
     }
 
+    @GetMapping("/createpost")
+    public String createPost() {
+        return "create_post";
+    }
     @GetMapping("/posts")
     public String viewUsersPage(Model model) {
         model.addAttribute("listPosts", postService.getAllPosts());

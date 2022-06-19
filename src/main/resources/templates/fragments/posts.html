@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="row" th:fragment="allposts">
+    <!-- Blog entries-->
+    <div class="col-lg-8">
+        <!-- Nested row for non-featured blog posts-->
+        <div class="row">
+            <div class="col-lg-6">
+                <!-- Blog posts-->
+                <div class="card mb-4">
+                    <div class="card-body" th:each="post: ${listPosts}">
+                        <div class="small text-muted" th:text="${post.user.userName}"></div>
+                        <h2 class="card-title h4" th:text="${post.heading}"></h2>
+                        <p class="card-text" th:text="${post.content}"></p>
+                        <a class="btn btn-primary" href="#!">Read more →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
