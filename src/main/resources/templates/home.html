@@ -7,17 +7,12 @@
         <!-- Page header with logo and tagline-->
         <div th:replace="fragments/header :: header"/>
         <!-- Page content-->
-        <div class="container">
-            <div th:replace="fragments/posts :: allposts"/>
+        <div class="container" style="min-height: 80vh;">
+            <div class="row">
+                <div th:replace="fragments/allposts :: allposts"/>
 
-            <!-- Side widgets-->
-            <div class="col-lg-4">
-                <!-- Side widget-->
-                <div class="card mb-4">
-                    <div class="card-header">Side Widget</div>
-                    <div class="card-body"><a class="btn btn-primary" href="@{/createpost}">Create Post</a></div>
-                </div>
-            </div>
+                <div th:replace="fragments/widget :: widget"/>
+           </div>
         </div>
 
 

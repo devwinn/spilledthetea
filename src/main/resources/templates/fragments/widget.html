@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- Side widgets-->
+<div class="col-lg-4" th:fragment="widget">
+    <!-- Side widget-->
+    <div class="card mb-4">
+        <div class="card-header">Things To Brew</div>
+        <div class="card-body"><a class="btn btn-primary" href="@{/createpost}">Create Post</a></div>
+    </div>
+</div>
+</body>
+</html>

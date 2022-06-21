@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/head"/>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"/>
+<div th:replace="fragments/header :: header"/>
+
+<!-- Page content-->
+<div class="container mt-5" style="min-height: 75vh;">
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Post content-->
+            <article>
+                <!-- Post header-->
+                <header class="mb-4">
+                    <!-- Post title-->
+                    <h1 class="fw-bolder mb-1" th:text="${post.heading}"></h1>
+                    <!-- Post meta content -->
+                    <div class="text-muted fst-italic mb-2" th:text="${post.user.userName}"></div>
+
+                </header>
+
+                <section class="mb-5">
+                    <p th:text="${post.content}"></p>
+                </section>
+            </article>
+        </div>
+        <div th:replace="fragments/widget :: widget"/>
+    </div>
+</div>
+
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

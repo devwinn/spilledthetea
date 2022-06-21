@@ -2,9 +2,10 @@ package com.devinwingo.capstone.models;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.Objects;
 
 @NoArgsConstructor
@@ -17,7 +18,7 @@ import java.util.Objects;
 @Entity
 public class Post {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
     @NonNull
@@ -27,6 +28,11 @@ public class Post {
     @NonNull
     @Column(length = 350)
     String content;
+
+    @NonNull
+    @Column(name = "date")
+    @CreationTimestamp
+    Date createdOn;
 
     @NonNull
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})

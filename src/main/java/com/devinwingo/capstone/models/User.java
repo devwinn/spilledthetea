@@ -34,6 +34,11 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     List<Post> posts = new ArrayList<>();
 
+    public void addPost(Post post) {
+        posts.add(post);
+        post.setUser(this);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
