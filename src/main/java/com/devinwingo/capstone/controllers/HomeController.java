@@ -22,8 +22,11 @@ public class HomeController {
         this.postService = postService;
     }
 
+    //Mapping for home page
     @GetMapping("/")
     public String homePage(Model model) {
+        //gets all posts from all users to show on homepage
+        //**need to add query to limit posts to 10-20
         model.addAttribute("listPosts", postService.getAllPosts());
         return "home";
     }

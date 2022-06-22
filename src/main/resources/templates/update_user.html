@@ -14,7 +14,7 @@
     <hr>
     <h2>Update User</h2>
 
-    <form action="#" th:action="@{/saveUser}" th:object="${user}" method="POST">
+    <form action="#" th:action="@{/admin/saveUser}" th:object="${user}" method="POST">
         <input type="text" th:field="*{email}"
                th:placeholder="${user.email}" class="form-control mb-4 col-4">
 
@@ -31,7 +31,7 @@
                th:placeholder="${user.userName}" class="form-control mb-4 col-4">
 
         <button type="submit" class="btn btn-info col-3">Save User</button>
-        <a th:href="@{/deleteUser/{id}(id=${user.email})}"  class="btn btn-danger">Delete User</a>
+        <a th:href="@{/admin/deleteUser/{id}(id=${user.email})}"  class="btn btn-danger">Delete User</a>
     </form>
 
     <hr>

@@ -3,6 +3,7 @@ package com.devinwingo.capstone.models;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -18,7 +19,7 @@ import java.util.Objects;
 @Entity
 public class Post {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     int id;
 
     @NonNull
@@ -38,6 +39,7 @@ public class Post {
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(nullable = false)
     User user;
+
 
     @Override
     public boolean equals(Object o) {

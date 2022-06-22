@@ -19,12 +19,10 @@ import java.util.Optional;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Transactional(rollbackOn = {DataAccessException.class})
 public class UserService {
-    PostRepository postRepository;
     UserRepository userRepository;
 
     @Autowired
-    public UserService(PostRepository postRepository, UserRepository userRepository) {
-        this.postRepository = postRepository;
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -44,7 +42,6 @@ public class UserService {
     public Optional<User> getByUserName(String userName) {
         return userRepository.findByUserName(userName);
     }
-
 
     public User getUserByEmail(String email) {
         Optional<User> optional = userRepository.findById(email);

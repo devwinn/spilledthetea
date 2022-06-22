@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,31 +28,28 @@ public class PostController {
         this.userService = userService;
     }
 
+    //mapping for post creation
+    //**Add user authorization
     @GetMapping("/createpost")
     public String createPost(Model model) {
-        Post newPost = new Post();
-        User user = new User();
-        model.addAttribute("post", newPost);
-        model.addAttribute("user", user);
+        Post post = new Post();
+        model.addAttribute("post", post);
+        log.warn(post.toString());
         return "create_post";
     }
 
-    @PostMapping("/createpost")
-    public String createPost(@ModelAttribute User user, @ModelAttribute Post post) {
-        Optional<User> optionalUser = this.userService.getByUserName(user.getUserName());
-        if (optionalUser.isPresent()) {
-            System.out.println("not empty");
-            User user1 = optionalUser.get();
-            post.setUser(user1);
-            this.postService.savePost(post);
-            return "redirect:/post/" + post.getId();
+    //add/implement current user
+    //postmapping for post creation
+    @PostMapping("/savepost")
+    public String createPost(@ModelAttribute("post") Post post) {
+       //for testing user is hardcoded
+        User user = this.userService.getUserByEmail("dev@gmail.com");
+        user.addPost(post);
+        userService.saveUser(user);
 
-        } else {
-            if (optionalUser.isEmpty()) {
-                System.out.println("empty user");
-            }
-            return "error";
-        }
+        log.info(user.toString());
+        log.info(post.toString());
+        return "redirect:/";
     }
 
     //Need to add user authorization
