@@ -12,21 +12,21 @@
 
                     <div><h1 class="text-center mb-4 mt-4">Login</h1></div>
 
-                    <form>
+                    <form th:action="@{/login/processing}" method="post">
                         <!-- Email input -->
                         <div class="form-outline mb-4">
-                            <input type="email" id="emailinput" class="form-control" />
+                            <input type="email" id="emailinput" name="email" class="form-control" />
                             <label class="form-label" for="emailInput">Email address</label>
                         </div>
 
                         <!-- Password input -->
                         <div class="form-outline mb-4">
-                            <input type="password" id="passwordInput" class="form-control" />
+                            <input type="password" id="passwordInput" name="password" class="form-control" />
                             <label class="form-label" for="passwordInput">Password</label>
                         </div>
 
                         <!-- Submit button -->
-                        <button type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
+                        <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
 
                         <!-- Register buttons -->
                         <div class="text-center">

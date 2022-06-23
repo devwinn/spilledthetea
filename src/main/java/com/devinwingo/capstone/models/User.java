@@ -2,6 +2,7 @@ package com.devinwingo.capstone.models;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,7 +11,6 @@ import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
 @Getter
 @Setter
 @ToString
@@ -19,20 +19,32 @@ import java.util.Objects;
 @Entity
 public class User {
     @Id
-    @NonNull
     String email;
-    @NonNull
+
     String userName;
-    @NonNull
+
     String firstName;
-    @NonNull
+
     String lastName;
-    @NonNull
+
+    @Setter(AccessLevel.NONE)
     String password;
+
+    public User(String email, String userName, String firstName, String lastName, String password) {
+        this.email = email;
+        this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = new BCryptPasswordEncoder(4).encode(password);
+    }
 
     @ToString.Exclude
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     List<Post> posts = new ArrayList<>();
+
+    public void setPassword(String password) {
+        this.password = new BCryptPasswordEncoder(4).encode(password);
+    }
 
     public void addPost(Post post) {
         posts.add(post);

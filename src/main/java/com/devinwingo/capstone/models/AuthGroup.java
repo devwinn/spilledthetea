@@ -5,7 +5,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
-
+//step 1
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
@@ -27,5 +27,7 @@ public class AuthGroup {
 
     //User Role
     @NonNull
-    String aAuthGroup;
+    String role;
 }
+
+//132

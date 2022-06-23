@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @Slf4j
-@RequestMapping(value = "admin")
+@RequestMapping(value = "/admin")
 public class AdminController {
     UserService userService;
     @Autowired
@@ -28,7 +28,7 @@ public class AdminController {
     @PostMapping("/saveUser")
     public String saveUser(@ModelAttribute("user") User user){
         userService.saveUser(user);
-        return "redirect:/showUsers";
+        return "redirect:/admin";
     }
 
     @GetMapping("/showNewUserForm")
@@ -47,6 +47,6 @@ public class AdminController {
     @GetMapping("/deleteUser/{id}")
     public String deleteEmployee(@PathVariable (value = "id") String email) {
         userService.deleteUserByEmail(email);
-        return "redirect:/showUsers";
+        return "redirect:/admin";
     }
 }
