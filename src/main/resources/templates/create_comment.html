@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/head"/>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"/>
+<div th:replace="fragments/header :: header"/>
+
+<div class="container" style="min-height: 80vh;">
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Nested row for content-->
+            <div class="row">
+                <div class="col-lg-8">
+                    <h1 th:text="${post.heading}"></h1>
+                    <!-- Comment Form-->
+                    <div class="card mb-4">
+                        <div class="card-header">Comment</div>
+                            <form action="#" th:action="@{${post.id} +'/saveComment'}" method="post">
+                                <!-- Message input -->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="content">Comment</label>
+                                    <textarea class="form-control" id="content" rows="4" th:field="*{comment.content}"></textarea>
+                                </div>
+                                <!-- Submit button -->
+                                <button type="submit" class="btn btn-primary btn-block mb-4">Submit</button>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:replace="fragments/widget :: widget"/>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

@@ -19,13 +19,27 @@
                     <h1 class="fw-bolder mb-1" th:text="${post.heading}"></h1>
                     <!-- Post meta content -->
                     <div class="text-muted fst-italic mb-2" th:text="${post.user.userName}"></div>
-
                 </header>
 
                 <section class="mb-5">
                     <p th:text="${post.content}"></p>
                 </section>
             </article>
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Blog posts-->
+                    <div class="card mb-4">
+                        <div class="card-header">Comments</div>
+                        <a class="btn btn-primary" th:href="@{'~/leaveComment/' + ${postId}}">Leave Comment</a>
+                        <div th:text="${post.id}"></div>
+                        <div class="card-body" th:each="comment: ${listComments}">
+                            <p class="card-text" th:text="${comment.content}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <div th:replace="fragments/widget :: widget"/>
     </div>
