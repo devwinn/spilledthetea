@@ -17,7 +17,7 @@
                     <!-- Comment Form-->
                     <div class="card mb-4">
                         <div class="card-header">Comment</div>
-                            <form action="#" th:action="@{${post.id} +'/saveComment'}" method="post">
+                            <form action="#" th:action="@{'~/saveComment/' + ${post.id}}" method="post">
                                 <!-- Message input -->
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="content">Comment</label>

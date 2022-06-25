@@ -18,12 +18,19 @@ import java.util.Objects;
 public class Comment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     int id;
 
     @NonNull
     @NotEmpty
     String content;
+
+    String userName;
+
+    @NonNull
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn
+    Post post;
 
     @Override
     public boolean equals(Object o) {
@@ -37,10 +44,6 @@ public class Comment {
     public int hashCode() {
         return Objects.hash(id, content, post);
     }
-
-    @NonNull
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
-    Post post;
 
 
 

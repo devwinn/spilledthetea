@@ -4,13 +4,19 @@ import com.devinwingo.capstone.dao.PostRepository;
 import com.devinwingo.capstone.dao.UserRepository;
 import com.devinwingo.capstone.models.Post;
 import com.devinwingo.capstone.models.User;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@Transactional(rollbackOn = {DataAccessException.class})
 public class PostService {
 
     PostRepository postRepository;
@@ -36,6 +42,6 @@ public class PostService {
     }
 
     public Post savePost(Post post) {
-        return postRepository.save(post);
+        return this.postRepository.save(post);
     }
 }
