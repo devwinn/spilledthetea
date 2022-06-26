@@ -8,13 +8,8 @@
     <div th:replace="fragments/header :: header"/>
     <div class="container" style="min-height: 80vh;">
 
-        <form action="#" th:action="@{'/posts/savepost'}" method="post">
+        <form action="#"  th:action="@{'/posts/savepost'}"  method="post">
 
-            <!-- Text input
-            <div class="form-outline mb-4">
-                <label class="form-label" for="username">User Name</label>
-                <input type="text" id="username" class="form-control" th:field="*{user.userName}" />
-            </div> -->
 
             <div class="form-outline mb-4">
                 <label class="form-label" for="heading">Heading</label>
@@ -26,6 +21,18 @@
             <div class="form-outline mb-4">
                 <label class="form-label" for="content">Post</label>
                 <textarea class="form-control" id="content" rows="4" th:field="*{post.content}"></textarea>
+            </div>
+
+            <div class="form-outline mb-4">
+                <p>Select Category:</p>
+			    <label for="category">User hobbies (multiple select):</label>
+			    <br />
+			    <select id="category" th:field="*{post.categories}" multiple="multiple">
+				<option th:each="category : ${allCategories}"
+						th:value="${{category}}"
+						th:text="${category.name}">
+				</option>
+			    </select>
 
             </div>
 

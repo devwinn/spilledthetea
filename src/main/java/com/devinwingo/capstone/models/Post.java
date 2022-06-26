@@ -44,15 +44,22 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     List<Comment> comments = new ArrayList<>();
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.LAZY)
     @JoinTable(name = "post_categories",
             joinColumns = @JoinColumn(name = "post_id"),
             inverseJoinColumns = @JoinColumn(name = "category_name"))
-    Set<Category> categories = new HashSet<>();
+    List<Category> categories = new ArrayList<>();
 
     public void addComment(Comment comment) {
         comments.add(comment);
         comment.setPost(this);
+    }
+
+    public void addCategory(String catName) {
+        Category newCategory = new Category();
+        newCategory.setName(catName);
+        this.categories.add(newCategory);
+        newCategory.getPosts().add(this);
     }
 
 

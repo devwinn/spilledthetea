@@ -1,10 +1,7 @@
 package com.devinwingo.capstone.controllers;
 
-import com.devinwingo.capstone.dao.CommentRepository;
-import com.devinwingo.capstone.dao.PostRepository;
 import com.devinwingo.capstone.models.Comment;
 import com.devinwingo.capstone.models.Post;
-import com.devinwingo.capstone.models.User;
 import com.devinwingo.capstone.services.PostService;
 import com.devinwingo.capstone.services.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -18,8 +15,6 @@ import java.util.Optional;
 @Controller @Slf4j
 public class CommentController
 {
-
-
     PostService postService;
     UserService userService;
 
