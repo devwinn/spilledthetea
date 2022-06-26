@@ -41,7 +41,11 @@ public class PostController {
     @PostMapping("/savepost")
     public String createPost(@ModelAttribute("post") Post post) {
        //for testing user is hardcoded
+        log.warn(post.toString());
+
         User user = this.userService.getUserByEmail("dev@gmail.com");
+        log.warn(user.toString());
+
         user.addPost(post);
         userService.saveUser(user);
 

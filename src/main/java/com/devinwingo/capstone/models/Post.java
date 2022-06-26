@@ -6,7 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @NoArgsConstructor
@@ -33,7 +33,7 @@ public class Post {
     @NonNull
     @Column(name = "date")
     @CreationTimestamp
-    Date createdOn;
+    LocalDateTime createdOn;
 
     @NonNull
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})

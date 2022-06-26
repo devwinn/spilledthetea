@@ -14,4 +14,6 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
    @Query(value = "select * from post where user_email = :email", nativeQuery = true)
    List<Post> findAllByUser(String email);
 
+   @Query(value = "select * from post order by date desc limit 20", nativeQuery = true)
+   List<Post> findRecentPosts();
 }

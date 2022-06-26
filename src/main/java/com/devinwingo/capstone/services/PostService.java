@@ -33,6 +33,10 @@ public class PostService {
         return postRepository.findAll();
     }
 
+    public List<Post> getRecentPosts() {
+        return postRepository.findRecentPosts();
+    }
+
     public List<Post> getUserPosts(String email) {
         return postRepository.findAllByUser(email);
     }

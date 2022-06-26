@@ -39,7 +39,7 @@ public class UserController {
             User current = user.get();
             model.addAttribute("listPosts", postService.getUserPosts(current.getEmail()));
             log.info("successfully redirected to user profile");
-            return "my_posts";
+            return "userPosts";
         } else {
             log.warn("something went wrong");
             return "redirect:/";
