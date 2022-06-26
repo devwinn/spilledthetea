@@ -22,4 +22,5 @@ Consist of a heading, content, and the ability to add categories to the post.
 
 
 Relational Diagram -
+![Er Diagram}(/src/main/resources/static/images/ER_Diagram.png)
 
