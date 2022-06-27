@@ -17,7 +17,7 @@
                         <div class="col-lg-10">
                         <!-- Blog posts-->
                             <div class="card mb-4">
-                                <div class="card-header"><h4>My Posts</h4></div>
+                                <div class="card-header"><h4 th:text="|${user.userName}'s Posts|"></h4></div>
                                     <div class="card-body" th:each="post: ${listPosts}">
                                         <div class="small text-muted" th:text="${post.user.userName}"></div>
                                         <h2 class="card-title h4" th:text="${post.heading}"></h2>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.security.Principal;
 import java.util.Optional;
 
 @Controller @Slf4j
@@ -31,21 +32,25 @@ public class UserController {
     //mapping for user profile
     //**need to add current user username to mapping
     @GetMapping("profile")
-    public String goToProfile(Model model) {
+    public String goToProfile(Model model, Principal principal) {
         //**for testing purposes. need to use current session user when security is implemented
-        Optional <User> user = userService.getByUserName("devwin");
+        log.warn(principal.getName());
+        if(principal != null) {
 
-        if (user.isPresent()){
-            User current = user.get();
-            model.addAttribute("listPosts", postService.getUserPosts(current.getEmail()));
-            log.info("successfully redirected to user profile");
+            Optional<User> optional = userService.getByUserName(principal.getName());
+            if (optional.isPresent()){
+                User user = optional.get();
+                model.addAttribute("listPosts", postService.getUserPosts(user.getEmail()));
+                model.addAttribute("user", user);
+                log.info("successfully redirected to user profile");
+                log.info(user.toString());
+
+            }
             return "userPosts";
-        } else {
-            log.warn("something went wrong");
+        }else {
+            log.warn("Principal is null");
             return "redirect:/";
         }
-
-
     }
 
 }

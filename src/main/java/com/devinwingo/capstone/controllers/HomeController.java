@@ -41,8 +41,9 @@ public class HomeController {
     public String homePage(Principal principal, HttpSession session, Model model) {
         try {
             if (principal != null) {
-                session.setAttribute("currentUser", userService.getUserByEmail(principal.getName()));
+                session.setAttribute("currentUser", userService.getByUserName(principal.getName()));
                 log.info("session ID: " + session.getId() + " Value of currentUser: " + session.getAttribute("currentUser").toString());
+                log.info(principal.getName());
             }
         } catch (Exception e) {
             log.warn("homePage Exception!!");
@@ -78,7 +79,9 @@ public class HomeController {
     public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result){
         log.warn(user.toString());
 
-        if (userService.getUserByEmail(user.getEmail()).)
+        if (userService.getUserByEmail(user.getEmail()).isPresent()){
+
+        }
         if(result.hasErrors()) {
             log.warn("User not validated");
             return "registration";

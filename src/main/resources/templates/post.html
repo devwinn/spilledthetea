@@ -16,8 +16,9 @@
                 <!-- Post header-->
                 <header class="mb-4">
                     <!-- Post title-->
-                    <h1 class="fw-bolder mb-1" th:text="${post.heading}"></h1>
+                    <h2 class="fw-bolder mb-1" th:text="${post.heading}"></h2>
                     <!-- Post meta content -->
+                    <div class="text-muted fst-italic mb-1">Created By</div>
                     <div class="text-muted fst-italic mb-2" th:text="${post.user.userName}"></div>
                 </header>
 
@@ -27,14 +28,17 @@
             </article>
 
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-6">
                     <!-- Blog posts-->
                     <div class="card mb-4">
                         <div class="card-header">Comments</div>
                         <a class="btn btn-primary" th:href="@{'~/leaveComment/' + ${post.id}}">Leave Comment</a>
                         <br><br>
                         <div class="card-body" th:each="comment: ${listComments}">
-                            <p class="card-text" th:text="${comment.content}"></p>
+                            <div class="card-header" th:text="${comment.userName}"></div>
+                            <div class="card-body">
+                                <p class="card-text" th:text="${comment.content}"></p>
+                            </div>
                         </div>
                     </div>
                 </div>
