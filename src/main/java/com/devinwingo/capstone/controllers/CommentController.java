@@ -27,6 +27,7 @@ public class CommentController
     }
 
 
+    //Returns form to create Comment on Post. Post is retrieved via path variable id
     @GetMapping("/leaveComment/{id}")
     public String createComment(@PathVariable int id, Model model) {
         Comment comment = new Comment();
@@ -44,9 +45,11 @@ public class CommentController
         }
     }
 
+    //Current logged in User is set to Comment. Comment is Saved to Post then Current User is redirected back to post
     @PostMapping("/saveComment/{id}")
     public String saveComment(@PathVariable int id, @ModelAttribute("comment") Comment comment, Principal principal) {
         Optional<Post> optionalPost = this.postService.getById(id);
+        //Checks for Principal in order to set userName for Comment
         if (principal != null) {
             Optional<User> optional = userService.getByUserName(principal.getName());
             if (optional.isPresent()) {

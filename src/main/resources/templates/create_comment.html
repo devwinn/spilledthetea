@@ -20,7 +20,7 @@
                             <form action="#" th:action="@{'~/saveComment/' + ${post.id}}" method="post">
                                 <!-- Message input -->
                                 <div class="form-outline mb-4">
-                                    <textarea class="form-control" id="content" rows="4" th:field="*{comment.content}"></textarea>
+                                    <textarea class="form-control" id="content" rows="4" th:field="*{comment.content}" required minlength="3"></textarea>
                                 </div>
                                 <!-- Submit button -->
                                 <button type="submit" class="btn btn-primary btn-block mb-4">Submit</button>

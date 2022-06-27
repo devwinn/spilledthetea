@@ -61,10 +61,12 @@ public class AppSecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .authorizeRequests()
 //                .antMatchers("/")
 //                .permitAll()
-//                .antMatchers("/posts/**").authenticated()
+//                .antMatchers("/posts/**", "/leaveComment", "/saveComment", "/profile").authenticated()
+//                .antMatchers("/admin", "/admin/**").hasAuthority("ROLE_ADMIN")
 //                .and()
 //                .formLogin().loginPage("/login").usernameParameter("email").passwordParameter("password")
 //                .loginProcessingUrl("/login/processing").defaultSuccessUrl("/profile")
 //                .failureUrl("/login?error=true").permitAll();
+//
     }
 }

@@ -49,14 +49,14 @@ public class HomeController {
             log.warn("homePage Exception!!");
             e.printStackTrace();
         }
+        //Recent Posts is limited to 20
         model.addAttribute("listPosts", postService.getRecentPosts());
         return "index";
     }
 
     @GetMapping("/allPosts")
     public String allPostsPage(Model model) {
-        //gets all posts from all users to show on homepage
-        //**need to add query to limit posts to 10-20
+        //gets all posts from all users to show.
         model.addAttribute("listPosts", postService.getAllPosts());
         return "allPostsView";
     }
@@ -67,6 +67,7 @@ public class HomeController {
         return "login";
     }
 
+    //Mapping for Registration page
     @GetMapping("/register")
     public String showNewUserForm(Model model) {
         User user = new User();
@@ -74,7 +75,8 @@ public class HomeController {
         return "registration";
     }
 
-    //Save User W/ User Role
+    //Post Mapping for Registration. Save User W/ User Role Automatically. No Mechanism to add Admin privledges
+    //>>>>> Need to implement validation
     @PostMapping("/register/save")
     public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result){
         log.warn(user.toString());
