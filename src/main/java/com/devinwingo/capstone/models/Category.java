@@ -19,6 +19,7 @@ public class Category {
     @Id
     String name;
 
+    @ToString.Exclude
     @ManyToMany(mappedBy = "categories", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.EAGER)
     List<Post> posts = new ArrayList<>();
 

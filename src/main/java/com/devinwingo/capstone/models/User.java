@@ -2,9 +2,12 @@ package com.devinwingo.capstone.models;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -19,14 +22,24 @@ import java.util.Objects;
 @Entity
 public class User {
     @Id
+    @NotEmpty(message = "Please Enter Your Email")
+    @Email
+    @Column(name = "email", unique = true)
     String email;
 
+    @NotEmpty(message = "Please Enter Your User Name")
+    @Length(message = "User Name Must Be 6 Or More Characters", min = 6)
+    @Column(name = "user_name", unique = true)
     String userName;
 
+    @NotEmpty
     String firstName;
 
+    @NotEmpty
     String lastName;
 
+    @NotEmpty(message = "Enter Password")
+    @Length(message = "Password Must Be 8 Or More Characters", min = 8)
     @Setter(AccessLevel.NONE)
     String password;
 

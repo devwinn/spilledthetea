@@ -16,6 +16,8 @@
             <input type="text" th:field="*{email}"
                    placeholder="Email" class="form-control mb-4 col-4">
 
+            <p  th:if="${#fields.hasErrors('password')}" th:class="${#fields.hasErrors('password')}? error">
+            Invalid Password</p>
             <input type="text" th:field="*{password}"
                    placeholder="Password" class="form-control mb-4 col-4">
 

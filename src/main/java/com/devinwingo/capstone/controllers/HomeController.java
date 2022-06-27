@@ -1,36 +1,55 @@
 package com.devinwingo.capstone.controllers;
 
+import com.devinwingo.capstone.dao.AuthGroupRepository;
+import com.devinwingo.capstone.models.AuthGroup;
 import com.devinwingo.capstone.models.Post;
 import com.devinwingo.capstone.models.User;
 import com.devinwingo.capstone.services.PostService;
 import com.devinwingo.capstone.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.naming.Binding;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+import java.security.Principal;
 
 
 @Controller
 @Slf4j
+@SessionAttributes(value = {"currentUser"})
 public class HomeController {
 
     UserService userService;
     PostService postService;
-    public HomeController(UserService userService, PostService postService) {
+    AuthGroupRepository authGroupRepository;
+
+    @Autowired
+    public HomeController(UserService userService, PostService postService, AuthGroupRepository authGroupRepository) {
         this.userService = userService;
         this.postService = postService;
+        this.authGroupRepository = authGroupRepository;
     }
 
     //Mapping for home page
     @GetMapping("/")
-    public String homePage(Model model) {
-        //gets all posts from all users to show on homepage
-        //**need to add query to limit posts to 10-20
+    public String homePage(Principal principal, HttpSession session, Model model) {
+        try {
+            if (principal != null) {
+                session.setAttribute("currentUser", userService.getUserByEmail(principal.getName()));
+                log.info("session ID: " + session.getId() + " Value of currentUser: " + session.getAttribute("currentUser").toString());
+            }
+        } catch (Exception e) {
+            log.warn("homePage Exception!!");
+            e.printStackTrace();
+        }
         model.addAttribute("listPosts", postService.getRecentPosts());
-        return "home";
+        return "index";
     }
 
     @GetMapping("/allPosts")
@@ -54,10 +73,20 @@ public class HomeController {
         return "registration";
     }
 
+    //Save User W/ User Role
     @PostMapping("/register/save")
-    public String registerUser(@ModelAttribute("user") User user){
+    public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result){
+        log.warn(user.toString());
+
+        if (userService.getUserByEmail(user.getEmail()).)
+        if(result.hasErrors()) {
+            log.warn("User not validated");
+            return "registration";
+        }
+
         userService.saveUser(user);
-        return "redirect:/profile";
+        authGroupRepository.save(new AuthGroup(user.getEmail(), "ROLE_USER"));
+        return "redirect:/login";
     }
 
 }

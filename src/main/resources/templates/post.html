@@ -8,9 +8,9 @@
 <div th:replace="fragments/header :: header"/>
 
 <!-- Page content-->
-<div class="container mt-5" style="min-height: 75vh;">
+<div class="container mt-5" style="min-height: 75vh; font-family: 'Raleway', sans-serif;">
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-10">
             <!-- Post content-->
             <article>
                 <!-- Post header-->
@@ -31,8 +31,8 @@
                     <!-- Blog posts-->
                     <div class="card mb-4">
                         <div class="card-header">Comments</div>
-                        <a class="btn btn-primary" th:href="@{'~/leaveComment/' + ${postId}}">Leave Comment</a>
-                        <div th:text="${post.id}"></div>
+                        <a class="btn btn-primary" th:href="@{'~/leaveComment/' + ${post.id}}">Leave Comment</a>
+                        <br><br>
                         <div class="card-body" th:each="comment: ${listComments}">
                             <p class="card-text" th:text="${comment.content}"></p>
                         </div>

@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,9 +46,9 @@ public class PostController {
     //add/implement current user
     //postmapping for post creation
     @PostMapping("/savepost")
-    public String createPost(@ModelAttribute("post") Post post) {
+    public String createPost(@ModelAttribute("post") Post post, Principal principal) {
        //for testing user is hardcoded
-        log.warn(post.toString());
+        log.info(post.toString());
 
         User user = this.userService.getUserByEmail("dev@gmail.com");
         log.warn(user.toString());

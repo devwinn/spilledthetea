@@ -7,7 +7,7 @@
 <div th:replace="fragments/navbar :: navbar"/>
 <div th:replace="fragments/header :: header"/>
 
-<div class="container" style="min-height: 80vh;">
+<div class="container" style="min-height: 80vh; font-family: 'Raleway', sans-serif;">
     <div class="row">
         <div class="col-lg-8">
             <!-- Nested row for content-->
@@ -20,14 +20,11 @@
                             <form action="#" th:action="@{'~/saveComment/' + ${post.id}}" method="post">
                                 <!-- Message input -->
                                 <div class="form-outline mb-4">
-                                    <label class="form-label" for="content">Comment</label>
                                     <textarea class="form-control" id="content" rows="4" th:field="*{comment.content}"></textarea>
                                 </div>
                                 <!-- Submit button -->
                                 <button type="submit" class="btn btn-primary btn-block mb-4">Submit</button>
                             </form>
-                        </div>
-                        </div>
                     </div>
                 </div>
             </div>
