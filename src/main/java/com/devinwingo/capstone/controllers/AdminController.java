@@ -40,9 +40,15 @@ public class AdminController {
 
     @GetMapping("/showFormForUpdate/{id}")
     public String showFormForUpdate(@PathVariable(value = "id") String email, Model model) {
-        User user = userService.getUserByEmail(email);
-        model.addAttribute("user", user);
-        return "update_user";
+        if(userService.getUserByEmail(email).isPresent()){
+            User user = userService.getUserByEmail(email).get();
+            model.addAttribute("user", user);
+            return "update_user";
+        } else {
+            log.warn("User Not Found");
+            return "redirect:/admin";
+        }
+
     }
     @GetMapping("/deleteUser/{id}")
     public String deleteEmployee(@PathVariable (value = "id") String email) {

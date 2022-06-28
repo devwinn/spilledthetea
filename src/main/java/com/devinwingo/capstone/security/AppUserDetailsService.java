@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service @Slf4j
 public class AppUserDetailsService implements UserDetailsService {
@@ -33,8 +34,13 @@ public class AppUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         List<AuthGroup> authGroupList = authGroupRepository.findByaEmail(username);
-        User user = userService.getUserByEmail(username);
+        Optional<User> optional = userService.getUserByEmail(username);
 
-        return new AppUserPrincipal(user, authGroupList);
+        if (optional.isPresent()) {
+            User user = optional.get();
+            return new AppUserPrincipal(user, authGroupList);
+        } else {
+            throw new UsernameNotFoundException("No User Found");
+        }
     }
 }

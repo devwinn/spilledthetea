@@ -6,26 +6,25 @@
 <body>
     <div th:replace="fragments/navbar :: navbar"/>
     <div th:replace="fragments/header :: header"/>
-    <div class="container" style="min-height: 80vh;">
+    <div class="container" style="min-height: 80vh; font-family: 'Raleway', sans-serif;">
 
         <form action="#"  th:action="@{'/posts/savepost'}"  method="post">
 
 
             <div class="form-outline mb-4">
                 <label class="form-label" for="heading">Heading</label>
-                <input type="text" id="heading" class="form-control" th:field="*{post.heading}"/>
+                <input type="text" id="heading" class="form-control" th:field="*{post.heading}" required minlength="3"/>
             </div>
 
 
             <!-- Message input -->
             <div class="form-outline mb-4">
                 <label class="form-label" for="content">Post</label>
-                <textarea class="form-control" id="content" rows="4" th:field="*{post.content}"></textarea>
+                <textarea class="form-control" id="content" rows="4" th:field="*{post.content}" required minlength="5"></textarea>
             </div>
 
             <div class="form-outline mb-4">
-                <p>Select Category:</p>
-			    <label for="category">User hobbies (multiple select):</label>
+                <p>Select Category: (Hold Ctrl to add more than 1)</p>
 			    <br />
 			    <select id="category" th:field="*{post.categories}" multiple="multiple">
 				<option th:each="category : ${allCategories}"

@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,19 +46,24 @@ public class PostController {
     //add/implement current user
     //postmapping for post creation
     @PostMapping("/savepost")
-    public String createPost(@ModelAttribute("post") Post post) {
+    public String createPost(@ModelAttribute("post") Post post, Principal principal) {
        //for testing user is hardcoded
-        log.warn(post.toString());
-
-        User user = this.userService.getUserByEmail("dev@gmail.com");
-        log.warn(user.toString());
-
-        user.addPost(post);
-        userService.saveUser(user);
-
-        log.info(user.toString());
         log.info(post.toString());
-        return "redirect:/";
+        if(principal != null) {
+            Optional<User> optional = userService.getByUserName(principal.getName());
+            if (optional.isPresent()) {
+                User user = optional.get();
+                user.addPost(post);
+                userService.saveUser(user);
+
+                log.info(user.toString());
+                log.info(post.toString());
+            }
+        } else {
+            log.warn("no principal found");
+            return "error";
+        }
+        return "redirect:/profile";
     }
 
     //Need to add user authorization
@@ -71,11 +77,9 @@ public class PostController {
             model.addAttribute("postId",post1.getId());
             model.addAttribute("post", post1);
             model.addAttribute("listComments", post1.getComments());
-
         } else {
             return "error";
         }
-
         return "post";
     }
 }

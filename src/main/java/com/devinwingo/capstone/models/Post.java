@@ -44,6 +44,7 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     List<Comment> comments = new ArrayList<>();
 
+
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, fetch = FetchType.LAZY)
     @JoinTable(name = "post_categories",
             joinColumns = @JoinColumn(name = "post_id"),
