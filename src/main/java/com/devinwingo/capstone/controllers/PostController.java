@@ -74,7 +74,7 @@ public class PostController {
 
         if (post.isPresent()) {
             Post post1 = post.get();
-            model.addAttribute("postId",post1.getId());
+            model.addAttribute("categories",post1.getCategories());
             model.addAttribute("post", post1);
             model.addAttribute("listComments", post1.getComments());
         } else {

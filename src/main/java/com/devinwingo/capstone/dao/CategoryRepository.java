@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface CategoryRepository extends JpaRepository<Category, String> {
 
-//    @Query("select * from post_categories where post_id = :id")
-//    List<Category> findAllByPostId(int id);
+    @Query(value = "select * from post_categories where post_id = :id", nativeQuery = true)
+    List<Category> findAllByPostId(int id);
+
 }

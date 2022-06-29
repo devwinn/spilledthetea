@@ -35,12 +35,9 @@ public class CategoryService {
         return this.categoryRepository.findById(catName);
     }
 
-    public void createOrUpdateCategory(Category category) {
-        this.categoryRepository.save(category);
-    }
 
-//    public List<Category> getAllCategoriesbyPost(Post post) {
-//        return this.categoryRepository.findAllByPostId(post.getId());
-//    }
+    public List<Category> getAllCategoriesbyPost(Post post) {
+        return this.categoryRepository.findAllByPostId(post.getId());
+    }
 
 }
