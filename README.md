@@ -24,3 +24,17 @@ Consist of a heading, content, and the ability to add categories to the post.
 Relational Diagram -
 ![Er Diagram](/src/main/resources/static/images/ER_Diagram.png)
 
+
+User Stories - <br>
+Role User - <br>
+As a user I want to be able to create and update my account. <br>
+As a user I want to create a blog post. <br>
+As a user I want to see blog posts from other users. <br>
+As a user I want to be able to remove blog posts I've made. <br>
+As a user I want to add categories to my post. <br>
+As a user I want to see posts related to certain topics. <br>
+As a user I want other users to comment on my Posts. <br>
+<br>
+Role Admin - <br>
+As an admin I want to see all blog users. <br>
+As an admin I want to be able to create/delete users. <br>
