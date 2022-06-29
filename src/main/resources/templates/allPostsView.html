@@ -1,23 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<div th:replace="fragments/head :: head"/>
-<body style="font-family: 'Raleway', sans-serif;">
-<!-- Responsive navbar-->
-<div th:replace="fragments/navbar :: navbar"/>
-<!-- Page header with logo and tagline-->
-<div th:replace="fragments/header :: header"/>
-<!-- Page content-->
-<div class="container" style="min-height: 80vh; font-family: 'Raleway', sans-serif;">
-    <div class="row">
-        <div th:replace="fragments/allposts :: allposts"/>
-
-        <div th:replace="fragments/widget :: widget"/>
-    </div>
-</div>
-
-
-
-<!-- Footer-->
-<div th:replace="fragments/footer :: footer"/>
-</body>
+    <div th:replace="fragments/head :: head"/>
+    <body style="font-family: 'Raleway', sans-serif;">
+        <!-- Responsive navbar-->
+        <div th:replace="fragments/navbar :: navbar"/>
+        <!-- Page header with logo and tagline-->
+        <div th:replace="fragments/header :: header"/>
+        <!-- Page content-->
+        <div class="container" style="min-height: 80vh; font-family: 'Raleway', sans-serif;">
+            <div class="row">
+                <div th:replace="fragments/allposts :: allposts"/>
+                <div th:replace="fragments/widget :: widget"/>
+            </div>
+        </div>
+        <!-- Footer-->
+        <div th:replace="fragments/footer :: footer"/>
+    </body>
 </html>

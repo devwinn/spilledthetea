@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+
+<!-- Fragment for All Posts -->
 <body>
     <!-- Blog entries-->
     <div class="col-lg-10" th:fragment="allposts">
-        <!-- Nested row for non-featured blog posts-->
         <div class="row">
             <div class="col-lg-10">
                 <!-- Blog posts-->
@@ -22,7 +23,6 @@
                         <a class="btn btn-primary" th:href="@{'/posts/post/' + ${post.id}}">See Post</a>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

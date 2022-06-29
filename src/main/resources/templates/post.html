@@ -1,56 +1,69 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
     <div th:replace="fragments/head"/>
-</head>
-<body>
-<div th:replace="fragments/navbar :: navbar"/>
-<div th:replace="fragments/header :: header"/>
+    <body style="font-family: 'Raleway', sans-serif;">
+        <div th:replace="fragments/navbar :: navbar"/>
+        <div th:replace="fragments/header :: header"/>
 
-<!-- Page content-->
-<div class="container mt-5" style="min-height: 75vh; font-family: 'Raleway', sans-serif;">
-    <div class="row">
-        <div class="col-lg-10">
-            <!-- Post content-->
-            <article>
-                <!-- Post header-->
-                <header class="mb-4">
-                    <!-- Post title-->
-                    <h2 class="fw-bolder mb-1" th:text="${post.heading}"></h2>
-                    <!-- Post meta content -->
-                    <div class="text-muted fst-italic mb-1">Created By</div>
-                    <div class="text-muted fst-italic mb-2" th:text="${post.user.userName}"></div>
-                </header>
-
-                <section class="mb-5">
-                    <p th:text="${post.content}"></p>
-                </section>
-            </article>
-
+        <!-- Page content-->
+        <div class="container mt-5" style="min-height: 75vh;">
             <div class="row">
-                <div class="col-lg-6">
-                    <!-- Blog posts-->
-                    <div class="card mb-4">
-                        <div class="card-header">Comments</div>
-                        <a class="btn btn-primary" th:href="@{'~/leaveComment/' + ${post.id}}">Leave Comment</a>
-                        <br><br>
-                        <div class="card-body" th:each="comment: ${listComments}">
-                            <div class="card-header" th:text="${comment.userName}"></div>
-                            <div class="card-body">
-                                <p class="card-text" th:text="${comment.content}"></p>
+                <div class="col-lg-10">
+                    <!-- Post content-->
+                    <div class="row">
+                        <article>
+                            <!-- Post header-->
+                            <header class="mb-4">
+                                <!-- Post title-->
+                                <h2 class="fw-bolder mb-1" th:text="${post.heading}"></h2>
+                                <!-- Post meta content -->
+                                <div class="text-muted fst-italic mb-1">Created By</div>
+                                <div class="text-muted fst-italic mb-2" th:text="${post.user.userName}"></div>
+                            </header>
+
+                            <section class="mb-5">
+                                <p th:text="${post.content}"></p>
+                            </section>
+                        </article>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <!-- Blog posts-->
+                            <div class="card mb-4">
+                                <div class="card-header" style="display:flex; justify-content:space-between; align-items:center;">
+                                    <h5>Comments</h5>
+                                    <a class="btn btn-primary" th:href="@{'~/leaveComment/' + ${post.id}}">Leave Comment</a>
+                                </div>
+                                <br>
+                                <div class="card-body" th:each="comment: ${listComments}">
+                                    <div class="card-header" th:text="${comment.userName}"></div>
+                                    <div class="card-body">
+                                        <p class="card-text" th:text="${comment.content}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4" th:fragment="widget">
+                            <!-- Side widget-->
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h5>Categories</h5>
+                                </div>
+                                <div class="card-body" align="center">
+                                    <div th:each="category: ${categories}" style="display:inline-block">
+                                        <a th:href="@{'/categories/' + ${category.name}}" style="text-decoration:none; color:black;">
+                                            <span class="bg-light mb-1 p-1" style="border: 1px solid grey;" th:text="${category.name}"></span>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div th:replace="fragments/widget :: widget"/>
             </div>
-
         </div>
-        <div th:replace="fragments/widget :: widget"/>
-    </div>
-</div>
-
-
-<div th:replace="fragments/footer :: footer"/>
-
-</body>
+        <div th:replace="fragments/footer :: footer"/>
+    </body>
 </html>

@@ -64,6 +64,10 @@ public class User {
         post.setUser(this);
     }
 
+    public void deletePost(Post post) {
+        posts.remove(post);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

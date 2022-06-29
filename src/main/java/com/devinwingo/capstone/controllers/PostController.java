@@ -74,12 +74,30 @@ public class PostController {
 
         if (post.isPresent()) {
             Post post1 = post.get();
-            model.addAttribute("postId",post1.getId());
+            model.addAttribute("categories",post1.getCategories());
             model.addAttribute("post", post1);
             model.addAttribute("listComments", post1.getComments());
         } else {
             return "error";
         }
         return "post";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deletePost(@PathVariable int id, Principal principal, Model model) {
+        User currentUser = postService.getById(id).get().getUser();
+        Post post = postService.getById(id).get();
+        if(principal != null){
+            if(currentUser.equals(userService.getByUserName(principal.getName()).get())) {
+                postService.deleteUserPost(post);
+                log.info("Post deleted");
+            } else {
+                log.warn("Current User is not post author");
+            }
+            return "redirect:/profile";
+        } else {
+            log.warn("Principal is null");
+            return "redirect:/";
+        }
     }
 }

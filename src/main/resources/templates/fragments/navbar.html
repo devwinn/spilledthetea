@@ -4,23 +4,24 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
-<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="nav-link" style="color:white;" th:href="@{/login}" sec:authorize="!isAuthenticated()">Log In</a>
-        <a class="nav-link" style="color:white;" th:href="@{/logout}" sec:authorize="isAuthenticated()">Log Out</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/profile}" sec:authorize="hasRole('USER')">My Posts</a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/login}" sec:authorize="!isAuthenticated()">Login</a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/register}" sec:authorize="!isAuthenticated()">Create An Account</a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/admin}" sec:authorize="hasRole('ADMIN')">Admin</a></li>
 
-            </ul>
+<!--Fragment for Navigation Bar-->
+<body>
+    <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="nav-link" style="color:white;" th:href="@{/login}" sec:authorize="!isAuthenticated()">Log In</a>
+            <a class="nav-link" style="color:white;" th:href="@{/logout}" sec:authorize="isAuthenticated()">Log Out</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/profile}" sec:authorize="hasRole('USER')">My Posts</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/login}" sec:authorize="!isAuthenticated()">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/register}" sec:authorize="!isAuthenticated()">Create An Account</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/admin}" sec:authorize="hasRole('ADMIN')">Admin</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 </body>
 </html>

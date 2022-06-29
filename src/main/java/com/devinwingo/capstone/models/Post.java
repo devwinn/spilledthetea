@@ -35,9 +35,8 @@ public class Post {
     @CreationTimestamp
     LocalDateTime createdOn;
 
-    @NonNull
+
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
-    @JoinColumn(nullable = false)
     User user;
 
     @ToString.Exclude
@@ -61,6 +60,10 @@ public class Post {
         newCategory.setName(catName);
         this.categories.add(newCategory);
         newCategory.getPosts().add(this);
+    }
+
+    public void deleteCategories() {
+        this.getCategories().removeAll(this.getCategories());
     }
 
 

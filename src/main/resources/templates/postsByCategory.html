@@ -9,12 +9,11 @@
         <!-- Page content-->
         <div class="container" style="min-height: 80vh; font-family: 'Raleway', sans-serif;">
             <div class="row">
-                <div th:replace="fragments/recentPosts :: recentPosts"/>
-
+                <div th:replace="fragments/categoryPosts :: categoryPosts"/>
                 <div th:replace="fragments/widget :: widget"/>
-           </div>
+            </div>
         </div>
         <!-- Footer-->
         <div th:replace="fragments/footer :: footer"/>
-   </body>
+    </body>
 </html>

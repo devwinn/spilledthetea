@@ -6,6 +6,7 @@ import com.devinwingo.capstone.models.Post;
 import com.devinwingo.capstone.models.User;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import java.util.Optional;
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Transactional(rollbackOn = {DataAccessException.class})
+@Slf4j
 public class PostService {
 
     PostRepository postRepository;
@@ -46,6 +48,16 @@ public class PostService {
     }
 
     public Post savePost(Post post) {
-        return this.postRepository.save(post);
+        return this.postRepository.saveAndFlush(post);
+    }
+
+    public void deleteUserPost(Post post) {
+        User user = post.getUser();
+        log.info("current user: " + user.toString());
+        log.info("post to delete" + post.toString());
+        post.deleteCategories();
+        this.postRepository.saveAndFlush(post);
+        user.deletePost(post);
+        this.postRepository.delete(post);
     }
 }

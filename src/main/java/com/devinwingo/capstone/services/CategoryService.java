@@ -2,6 +2,7 @@ package com.devinwingo.capstone.services;
 
 import com.devinwingo.capstone.dao.CategoryRepository;
 import com.devinwingo.capstone.models.Category;
+import com.devinwingo.capstone.models.Post;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
@@ -34,8 +35,9 @@ public class CategoryService {
         return this.categoryRepository.findById(catName);
     }
 
-    public void createOrUpdateCategory(Category category) {
-        this.categoryRepository.save(category);
+
+    public List<Category> getAllCategoriesbyPost(Post post) {
+        return this.categoryRepository.findAllByPostId(post.getId());
     }
 
 }

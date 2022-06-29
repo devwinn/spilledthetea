@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<!--Fragment for viewing all posts by Category-->
+<body>
+<!-- Blog entries-->
+<div class="col-lg-10" th:fragment="categoryPosts">
+    <div class="row">
+        <div class="col-lg-10">
+            <div class="card mb-4">
+                <div class="card-header"><h4>Category: <span th:text="${category.name}"></span></h4></div>
+                <!-- Blog posts-->
+                <div class="card-body" th:each="post: ${posts}">
+                    <h2 class="card-title h5" th:text="${post.heading}"></h2>
+                    <div class="small text-muted" th:text="${post.user.userName}"></div>
+                    <br>
+                    <p class="card-text" th:text="${post.content}"></p>
+                    <a class="btn btn-primary" th:href="@{'/posts/post/' + ${post.id}}">See Post</a>
+                </div>
+                <br><br>
+                <a class="btn btn-primary" style ="width: 100%;" th:href="@{/allPosts}">See All Posts</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
