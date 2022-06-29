@@ -30,10 +30,8 @@ public class UserController {
     }
 
     //mapping for user profile
-    //**need to add current user username to mapping
     @GetMapping("profile")
     public String goToProfile(Model model, Principal principal) {
-        //**for testing purposes. need to use current session user when security is implemented
         log.warn(principal.getName());
         if(principal != null) {
 
@@ -44,12 +42,13 @@ public class UserController {
                 model.addAttribute("user", user);
                 log.info("successfully redirected to user profile");
                 log.info(user.toString());
-
+                return "userPosts";
+            } else {
+                return "redirect:/login";
             }
-            return "userPosts";
-        }else {
+        } else {
             log.warn("Principal is null");
-            return "redirect:/";
+            return "redirect:/login";
         }
     }
 

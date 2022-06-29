@@ -82,4 +82,22 @@ public class PostController {
         }
         return "post";
     }
+
+    @GetMapping("/delete/{id}")
+    public String deletePost(@PathVariable int id, Principal principal, Model model) {
+        User currentUser = postService.getById(id).get().getUser();
+        Post post = postService.getById(id).get();
+        if(principal != null){
+            if(currentUser.equals(userService.getByUserName(principal.getName()).get())) {
+                postService.deleteUserPost(post);
+                log.info("Post deleted");
+            } else {
+                log.warn("Current User is not post author");
+            }
+            return "redirect:/profile";
+        } else {
+            log.warn("Principal is null");
+            return "redirect:/";
+        }
+    }
 }

@@ -22,7 +22,10 @@
                                         <div class="small text-muted" th:text="${post.user.userName}"></div>
                                         <h2 class="card-title h4" th:text="${post.heading}"></h2>
                                         <p class="card-text" th:text="${post.content}"></p>
-                                        <a class="btn btn-primary" th:href="@{'/posts/post/' + ${post.id}}">See Post</a>
+                                        <div>
+                                            <a class="btn btn-primary" th:href="@{'/posts/post/' + ${post.id}}">See Post</a>
+                                            <a class="btn btn-danger" th:href="@{'/posts/delete/' + ${post.id}}">Delete Post</a>
+                                        </div>
                                     </div>
                             </div>
                         </div>
