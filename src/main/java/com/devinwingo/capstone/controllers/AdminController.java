@@ -1,5 +1,7 @@
 package com.devinwingo.capstone.controllers;
 
+import com.devinwingo.capstone.dao.AuthGroupRepository;
+import com.devinwingo.capstone.models.AuthGroup;
 import com.devinwingo.capstone.models.User;
 import com.devinwingo.capstone.services.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -13,9 +15,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/admin")
 public class AdminController {
     UserService userService;
+    AuthGroupRepository authGroupRepository;
     @Autowired
-    public AdminController(UserService userService) {
+    public AdminController(UserService userService, AuthGroupRepository authGroupRepository) {
         this.userService = userService;
+        this.authGroupRepository = authGroupRepository;
     }
 
 
@@ -27,6 +31,8 @@ public class AdminController {
 
     @PostMapping("/saveUser")
     public String saveUser(@ModelAttribute("user") User user){
+
+        authGroupRepository.save(new AuthGroup(user.getEmail(), "ROLE_USER"));
         userService.saveUser(user);
         return "redirect:/admin";
     }
