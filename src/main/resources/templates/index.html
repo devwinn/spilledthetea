@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">    <div th:replace="fragments/head :: head"/>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <div th:replace="fragments/head :: head"/>
     <body style="font-family: 'Raleway', sans-serif;">
         <!-- Responsive navbar-->
         <div th:replace="fragments/navbar :: navbar"/>
@@ -13,9 +14,6 @@
                 <div th:replace="fragments/widget :: widget"/>
            </div>
         </div>
-
-
-
         <!-- Footer-->
         <div th:replace="fragments/footer :: footer"/>
    </body>

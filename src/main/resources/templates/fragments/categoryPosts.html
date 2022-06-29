@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+
+<!--Fragment for viewing all posts by Category-->
 <body>
 <!-- Blog entries-->
-<div class="col-lg-10" th:fragment="recentPosts">
-    <!-- Nested row for non-featured blog posts-->
+<div class="col-lg-10" th:fragment="categoryPosts">
     <div class="row">
         <div class="col-lg-10">
-            <!-- Blog posts-->
             <div class="card mb-4">
-                <div class="card-header"><h4>Recent Posts</h4></div>
-
-                <div class="card-body" th:each="post: ${listPosts}">
+                <div class="card-header"><h4>Category: <span th:text="${category.name}"></span></h4></div>
+                <!-- Blog posts-->
+                <div class="card-body" th:each="post: ${posts}">
                     <h2 class="card-title h5" th:text="${post.heading}"></h2>
                     <div class="small text-muted" th:text="${post.user.userName}"></div>
                     <br>
@@ -24,7 +24,6 @@
                 <br><br>
                 <a class="btn btn-primary" style ="width: 100%;" th:href="@{/allPosts}">See All Posts</a>
             </div>
-
         </div>
     </div>
 </div>

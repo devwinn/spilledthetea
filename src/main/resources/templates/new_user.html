@@ -1,33 +1,38 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<div th:replace="fragments/head :: head"/>
-<body>
-<div class="container">
-  <h1 class="bg-light">Users</h1>
-  <hr>
-  <h2>Create User</h2>
+    <div th:replace="fragments/head :: head"/>
+    <body style="font-family: 'Raleway', sans-serif;">
+        <!-- Responsive navbar-->
+        <div th:replace="fragments/navbar :: navbar"/>
+        <!-- Page header with logo and tagline-->
+        <div th:replace="fragments/header :: header"/>
+        <div class="container" style="min-height: 80vh; font-family: 'Raleway', sans-serif;">
+            <div class="row">
+                <h1 class="bg-light">Users</h1>
+                <hr>
+                <h2>Create User</h2>
 
-  <form action="#" th:action="@{/admin/saveUser}" th:object="${user}" method="POST">
-    <input type="text" th:field="*{email}"
-           placeholder="Email" class="form-control mb-4 col-4">
+                <form action="#" th:action="@{/admin/saveUser}" th:object="${user}" method="POST">
+                    <input type="text" th:field="*{email}"
+                           placeholder="Email" class="form-control mb-4 col-4">
 
-    <input type="text" th:field="*{password}"
-           placeholder="Password" class="form-control mb-4 col-4">
+                    <input type="text" th:field="*{password}"
+                           placeholder="Password" class="form-control mb-4 col-4">
 
-    <input type="text" th:field="*{userName}"
-           placeholder="User Name" class="form-control mb-4 col-4">
+                    <input type="text" th:field="*{userName}"
+                           placeholder="User Name" class="form-control mb-4 col-4">
 
-    <input type="text" th:field="*{firstName}"
-           placeholder="First Name" class="form-control mb-4 col-4">
+                    <input type="text" th:field="*{firstName}"
+                           placeholder="First Name" class="form-control mb-4 col-4">
 
-    <input type="text" th:field="*{lastName}"
-           placeholder="Last Name" class="form-control mb-4 col-4">
+                    <input type="text" th:field="*{lastName}"
+                           placeholder="Last Name" class="form-control mb-4 col-4">
 
-    <button type="submit" class="btn btn-info col-2">Save User</button>
-  </form>
-
-  <hr>
-
-  <a th:href="@{/admin}"> Back to users</a>
-</div>
-</body>
+                    <button type="submit" class="btn btn-primary col-2">Save User</button>
+                </form>
+                <hr>
+                <a th:href="@{/admin}"> Back to users</a>
+            </div>
+        </div>
+        <div th:replace="fragments/footer :: footer"/>
+    </body>
 </html>

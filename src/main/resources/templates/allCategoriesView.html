@@ -1,31 +1,35 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<div th:replace="fragments/head :: head"/>
-<body style="font-family: 'Raleway', sans-serif;">
-<!-- Responsive navbar-->
-<div th:replace="fragments/navbar :: navbar"/>
-<!-- Page header with logo and tagline-->
-<div th:replace="fragments/header :: header"/>
-<!-- Page content-->
-<div class="container" style="min-height: 80vh; font-family: 'Raleway', sans-serif;">
-    <div class="row">
-        <div class="col-lg-8" align="center">
-                <div class="col-lg-6">
-                    <div class="card mb-4">
-                        <div class="card-header"><h4 align="center">Categories</h4></div>
-                            <div class="card-body"th:each="category: ${categories}" style="display:inline-block">
-                                <h5 class="bg-light mb-1 p-2" style="border: 1px solid grey; text-align:center;" th:text="${category.name}"></h5>
+    <div th:replace="fragments/head :: head"/>
+    <body style="font-family: 'Raleway', sans-serif;">
+        <!-- Responsive navbar-->
+        <div th:replace="fragments/navbar :: navbar"/>
+        <!-- Page header with logo and tagline-->
+        <div th:replace="fragments/header :: header"/>
+        <!-- Page content-->
+        <div class="container" style="min-height: 80vh; font-family: 'Raleway', sans-serif;">
+            <div class="row">
+                <div class="col-lg-8" align="center">
+                        <div class="col-lg-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h4 align="center">Categories</h4>
+                                </div>
+                                <div class="card-body"th:each="category: ${categories}" style="display:inline-block">
+                                    <div>
+                                        <a class="btn btn-primary" style="width: 50%;" th:href="@{'/categories/' + ${category.name}}">
+                                            <h5 th:text="${category.name}"></h5>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                    </div>
+                        </div>
                 </div>
+
+                <div align="center" th:replace="fragments/widget :: widget"/>
+            </div>
         </div>
-        <div align="center" th:replace="fragments/widget :: widget"/>
-    </div>
-</div>
-
-
-
-<!-- Footer-->
-<div th:replace="fragments/footer :: footer"/>
-</body>
+        <!-- Footer-->
+        <div th:replace="fragments/footer :: footer"/>
+    </body>
 </html>

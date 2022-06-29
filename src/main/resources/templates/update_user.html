@@ -1,42 +1,42 @@
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="ISO-8859-1">
-    <title>| Spilled | The | Tea |</title>
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-          crossorigin="anonymous">
 
-</head>
-<body>
-<div class="container">
-    <h1>Users</h1>
-    <hr>
-    <h2>Update User</h2>
+    <div th:replace="fragments/head"/>
 
-    <form action="#" th:action="@{/admin/saveUser}" th:object="${user}" method="POST">
-        <input type="text" th:field="*{email}"
-               th:placeholder="${user.email}" class="form-control mb-4 col-4">
+    <body>
+        <div th:replace="fragments/navbar :: navbar"/>
+        <div th:replace="fragments/header :: header"/>
 
-        <input type="text" th:field="*{password}"
-                class="form-control mb-4 col-4">
+        <div class="container" style="min-height: 80vh; font-family: 'Raleway', sans-serif;">
+            <div class="row">
+                <h2>Update</h2><br> <br>
 
-        <input type="text" th:field="*{userName}"
-               th:placeholder="${user.userName}" class="form-control mb-4 col-4">
+                <form action="#" th:action="@{/profile/saveUser}" th:object="${user}" method="POST">
+                    <input type="hidden" th:field="*{email}"
+                    class="form-control mb-4 col-4" required>
+                    <h5 th:text="${user.email}"></h5>
 
-        <input type="text" th:field="*{firstName}"
-               th:placeholder="${user.firstName}" class="form-control mb-4 col-4">
+                    <label for="password" style="color:red;">Please delete placeholder and re-enter/create new password</label>
+                    <input type="text" th:field="*{password}"
+                    id="password" placeholder="Enter Password" class="form-control mb-4 col-4" required minlength="8">
 
-        <input type="text" th:field="*{lastName}"
-               th:placeholder="${user.userName}" class="form-control mb-4 col-4">
+                    <label for="username">User Name</label>
+                    <input type="text" th:field="*{userName}"
+                    id="username" th:placeholder="${user.userName}" class="form-control mb-4 col-4" required minlength="6">
 
-        <button type="submit" class="btn btn-info col-3">Save User</button>
-        <a th:href="@{/admin/deleteUser/{id}(id=${user.email})}"  class="btn btn-danger">Delete User</a>
-    </form>
+                    <label for="firstname">First Name</label>
+                    <input type="text" th:field="*{firstName}"
+                    id="firstname" th:placeholder="${user.firstName}" class="form-control mb-4 col-4" required>
 
-    <hr>
+                    <label for="lastname">Last Name</label>
+                    <input type="text" th:field="*{lastName}"
+                    id="lastname" th:placeholder="${user.lastName}" class="form-control mb-4 col-4" required>
 
-    <a th:href="@{/admin}"> Back to users</a>
-</div>
-</body>
+                    <button type="submit" class="btn btn-primary">Save User</button>
+                    <a th:href="@{/profile}" class="btn btn-primary">Back To My Posts</a>
+                </form>
+            </div>
+        </div>
+        <div th:replace="fragments/footer :: footer"/>
+    </body>
 </html>

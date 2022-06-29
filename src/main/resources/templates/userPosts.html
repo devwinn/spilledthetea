@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <div th:replace="fragments/head"/>
-    </head>
+    <div th:replace="fragments/head"/>
+
     <body style="font-family: 'Raleway', sans-serif;">
         <!-- Responsive navbar-->
         <div th:replace="fragments/navbar :: navbar"/>
@@ -31,7 +30,19 @@
                         </div>
                     </div>
                 </div>
-                <div th:replace="fragments/widget :: widget"/>
+                <div class="col-lg-2" th:fragment="widget">
+                    <!-- Side widget-->
+                    <div class="card mb-4">
+                        <div class="card-header"><h5>Update</h5></div>
+                        <div class="card-body" align="center"><a class="btn btn-primary" th:href="@{'profile/update/' + ${user.email}}">Update My Info</a></div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header"><h5>Things To Brew</h5></div>
+                        <div class="card-body" align="center"><a class="btn btn-primary" th:href="@{/posts/createpost}">Create Post</a></div>
+                        <div class="card-body" align="center"><a class="btn btn-primary" th:href="@{/categories}">Categories</a></div>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- Footer-->

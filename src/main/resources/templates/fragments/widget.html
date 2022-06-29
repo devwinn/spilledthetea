@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+
+<!--Fragment for side widget-->
 <body>
-<!-- Side widgets-->
-<div class="col-lg-2" th:fragment="widget">
+    <div class="col-lg-2" th:fragment="widget">
     <!-- Side widget-->
-    <div class="card mb-4">
-        <div class="card-header"><h5>Things To Brew</h5></div>
-        <div class="card-body" align="center"><a class="btn btn-primary" th:href="@{/posts/createpost}">Create Post</a></div>
+        <div class="card mb-4">
+            <div class="card-header"><h5>Things To Brew</h5></div>
+            <div class="card-body" align="center"><a class="btn btn-primary" th:href="@{/posts/createpost}">Create Post</a></div>
+            <div class="card-body" align="center"><a class="btn btn-primary" th:href="@{/categories}">Categories</a></div>
+        </div>
     </div>
-</div>
 </body>
 </html>

@@ -9,16 +9,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.Optional;
 
 @Controller @Slf4j
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@RequestMapping(value = "/profile")
 public class UserController {
 
     UserService userService;
@@ -30,7 +28,7 @@ public class UserController {
     }
 
     //mapping for user profile
-    @GetMapping("profile")
+    @GetMapping
     public String goToProfile(Model model, Principal principal) {
         log.warn(principal.getName());
         if(principal != null) {
@@ -50,6 +48,26 @@ public class UserController {
             log.warn("Principal is null");
             return "redirect:/login";
         }
+    }
+
+    @GetMapping("/update/{id}")
+    public String showFormForUpdate(@PathVariable(value = "id") String email, Model model) {
+        if(userService.getUserByEmail(email).isPresent()){
+            User user = userService.getUserByEmail(email).get();
+            model.addAttribute("user", user);
+            log.info("User info before update: " + user.toString());
+            return "update_user";
+        } else {
+            log.warn("User Not Found");
+            return "redirect:/profile";
+        }
+    }
+
+    @PostMapping("/saveUser")
+    public String saveUser(@ModelAttribute("user") User user){
+        userService.saveUser(user);
+        log.info("User info after update: " + user.toString());
+        return "redirect:/profile";
     }
 
 }

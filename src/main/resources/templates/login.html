@@ -1,44 +1,35 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
     <div th:replace="fragments/head"/>
-    </head>
     <body style="font-family: 'Raleway', sans-serif;">
         <div th:replace="fragments/navbar :: navbar"/>
         <div th:replace="fragments/header :: header"/>
-
         <div class="container" style="min-height: 80vh; font-family: 'Raleway', sans-serif;">
             <div class="row">
-
-                    <div><h1 class="text-center mb-4 mt-4">Login</h1></div>
-
+                    <div>
+                        <h1 class="text-center mb-4 mt-4">Login</h1>
+                    </div>
                     <form th:action="@{/login/processing}" method="post">
                         <!-- Email input -->
                         <div class="form-outline mb-4">
                             <input type="email" id="emailinput" name="email" class="form-control" />
                             <label class="form-label" for="emailInput">Email address</label>
                         </div>
-
                         <!-- Password input -->
                         <div class="form-outline mb-4">
                             <input type="password" id="passwordInput" name="password" class="form-control" />
                             <label class="form-label" for="passwordInput">Password</label>
                         </div>
-
                         <!-- Submit button -->
                         <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
                         <br><br><br>
-
                         <!-- Register buttons -->
                         <div class="text-center">
                             <p>Not a member? <a href="#" th:href="@{/register}">Register</a></p>
                         </div>
                     </form>
             </div>
-
         </div>
-
         <div th:replace="fragments/footer :: footer"/>
-
     </body>
 </html>
