@@ -22,7 +22,7 @@ public class AdminController {
         this.authGroupRepository = authGroupRepository;
     }
 
-
+    //Shows all registered users
     @GetMapping
     public String viewUsersPage(Model model) {
         model.addAttribute("listUsers", userService.getAllUsers());
@@ -31,12 +31,12 @@ public class AdminController {
 
     @PostMapping("/saveUser")
     public String saveUser(@ModelAttribute("user") User user){
-
         authGroupRepository.save(new AuthGroup(user.getEmail(), "ROLE_USER"));
         userService.saveUser(user);
         return "redirect:/admin";
     }
 
+    //Form to create new user from admin page
     @GetMapping("/showNewUserForm")
     public String showNewUserForm(Model model) {
         User user = new User();
@@ -44,21 +44,23 @@ public class AdminController {
         return "new_user";
     }
 
-    @GetMapping("/showFormForUpdate/{id}")
-    public String showFormForUpdate(@PathVariable(value = "id") String email, Model model) {
-        if(userService.getUserByEmail(email).isPresent()){
-            User user = userService.getUserByEmail(email).get();
-            model.addAttribute("user", user);
-            return "update_user";
-        } else {
-            log.warn("User Not Found");
-            return "redirect:/admin";
-        }
-
-    }
+    //Delete User from admin page
     @GetMapping("/deleteUser/{id}")
     public String deleteEmployee(@PathVariable (value = "id") String email) {
         userService.deleteUserByEmail(email);
         return "redirect:/admin";
     }
 }
+
+//    Not Used. Didn't want to delete. used to update users. "update_user" repurposed to UserController to allow user to edit their own info
+//    @GetMapping("/showFormForUpdate/{id}")
+//    public String showFormForUpdate(@PathVariable(value = "id") String email, Model model) {
+//        if(userService.getUserByEmail(email).isPresent()){
+//            User user = userService.getUserByEmail(email).get();
+//            model.addAttribute("user", user);
+//            return "update_user";
+//        } else {
+//            log.warn("User Not Found");
+//            return "redirect:/admin";
+//        }
+//    }

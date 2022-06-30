@@ -1,12 +1,11 @@
 package com.devinwingo.capstone.models;
-
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
+//COMMENT MODEL
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
@@ -32,6 +31,7 @@ public class Comment {
     @JoinColumn
     Post post;
 
+    //Override Equals and Hashcode
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

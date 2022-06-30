@@ -27,17 +27,14 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
+    //Gets all Categories to list in allCategoriesView.html
     public List<Category> getAllCategories() {
         return this.categoryRepository.findAll();
     }
 
+    //Gets category by category name
     public Optional<Category> getCategoryByName(String catName) {
         return this.categoryRepository.findById(catName);
-    }
-
-
-    public List<Category> getAllCategoriesbyPost(Post post) {
-        return this.categoryRepository.findAllByPostId(post.getId());
     }
 
 }

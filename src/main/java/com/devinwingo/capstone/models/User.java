@@ -1,5 +1,4 @@
 package com.devinwingo.capstone.models;
-
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.validator.constraints.Length;
@@ -11,7 +10,7 @@ import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
+//USER MODEL
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -56,10 +55,12 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     List<Post> posts = new ArrayList<>();
 
+    //password Setter to encrypt password
     public void setPassword(String password) {
         this.password = new BCryptPasswordEncoder(4).encode(password);
     }
 
+    //Helper Method to Add Post
     public void addPost(Post post) {
         posts.add(post);
         post.setUser(this);
@@ -69,6 +70,7 @@ public class User {
         posts.remove(post);
     }
 
+    //Override Equals and Hashcode
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

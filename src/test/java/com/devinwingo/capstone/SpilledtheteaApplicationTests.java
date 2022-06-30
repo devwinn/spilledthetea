@@ -30,6 +30,9 @@ class SpilledtheteaApplicationTests {
 
 	@Autowired
 	private PostRepository postRepository;
+
+
+	//Test for Query in UserRepository
 	@Test
 	public void findByUserName() {
 		User user = User.builder()
@@ -43,6 +46,7 @@ class SpilledtheteaApplicationTests {
 		assertEquals(userRepository.findByUserName("cweathers"), userRepository.findByUserName(user.getUserName()));
 	}
 
+	//Test for query in PostRepository
 	@Test
 	void findAllByUser() {
 		User testUser = User.builder()
