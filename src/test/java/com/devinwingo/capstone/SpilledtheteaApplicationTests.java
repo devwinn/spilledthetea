@@ -33,6 +33,7 @@ class SpilledtheteaApplicationTests {
 
 
 	//Test for Query in UserRepository
+	//Finds the user by searching for given userName
 	@Test
 	public void findByUserName() {
 		User user = User.builder()
@@ -47,6 +48,7 @@ class SpilledtheteaApplicationTests {
 	}
 
 	//Test for query in PostRepository
+	//Finds all posts created by user searching by userEmail
 	@Test
 	void findAllByUser() {
 		User testUser = User.builder()

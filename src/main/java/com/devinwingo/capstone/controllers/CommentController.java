@@ -5,6 +5,8 @@ import com.devinwingo.capstone.models.Post;
 import com.devinwingo.capstone.models.User;
 import com.devinwingo.capstone.services.PostService;
 import com.devinwingo.capstone.services.UserService;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import java.security.Principal;
 import java.util.Optional;
 
 @Controller @Slf4j
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CommentController
 {
     PostService postService;

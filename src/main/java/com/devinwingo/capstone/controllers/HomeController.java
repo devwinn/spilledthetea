@@ -6,6 +6,8 @@ import com.devinwingo.capstone.models.Post;
 import com.devinwingo.capstone.models.User;
 import com.devinwingo.capstone.services.PostService;
 import com.devinwingo.capstone.services.UserService;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import java.security.Principal;
 
 @Controller
 @Slf4j
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @SessionAttributes(value = {"currentUser"})
 public class HomeController {
 
@@ -38,18 +41,8 @@ public class HomeController {
 
     //Mapping for home page
     @GetMapping("/")
-    public String homePage(Principal principal, HttpSession session, Model model) {
-        try {
-            if (principal != null) {
-                session.setAttribute("currentUser", userService.getByUserName(principal.getName()));
-                log.info("session ID: " + session.getId() + " Value of currentUser: " + session.getAttribute("currentUser").toString());
-                log.info(principal.getName());
-            }
-        } catch (Exception e) {
-            log.warn("homePage Exception!!");
-            e.printStackTrace();
-        }
-        //Recent Posts is limited to 20
+    public String homePage(Model model) {
+        //Recent Posts is limited to 10
         model.addAttribute("listPosts", postService.getRecentPosts());
         return "index";
     }
@@ -76,19 +69,17 @@ public class HomeController {
     }
 
     //Post Mapping for Registration. Save User W/ User Role Automatically. No Mechanism to add Admin privledges
-    //>>>>> Need to implement validation
     @PostMapping("/register/save")
     public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result){
         log.warn(user.toString());
-
         if (userService.getUserByEmail(user.getEmail()).isPresent()){
-
+            log.warn("Email in use. User not validated");
+            return "redirect:/register";
         }
         if(result.hasErrors()) {
             log.warn("User not validated");
-            return "registration";
+            return "redirect:/register";
         }
-
         userService.saveUser(user);
         authGroupRepository.save(new AuthGroup(user.getEmail(), "ROLE_USER"));
         return "redirect:/login";

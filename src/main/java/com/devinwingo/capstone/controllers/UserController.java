@@ -32,16 +32,19 @@ public class UserController {
     public String goToProfile(Model model, Principal principal) {
         log.warn(principal.getName());
         if(principal != null) {
-
+            //Retrieves user by taking the current session principal and searching for user by username
             Optional<User> optional = userService.getByUserName(principal.getName());
             if (optional.isPresent()){
                 User user = optional.get();
+                //Add User posts to model
                 model.addAttribute("listPosts", postService.getUserPosts(user.getEmail()));
+                //Add User to model
                 model.addAttribute("user", user);
                 log.info("successfully redirected to user profile");
                 log.info(user.toString());
                 return "userPosts";
             } else {
+                //Return to login if principal is not found
                 return "redirect:/login";
             }
         } else {
@@ -54,6 +57,7 @@ public class UserController {
     public String showFormForUpdate(@PathVariable(value = "id") String email, Model model) {
         if(userService.getUserByEmail(email).isPresent()){
             User user = userService.getUserByEmail(email).get();
+           //add user info to the model to populate current info. when form is submitted it will submit with populated and changed info
             model.addAttribute("user", user);
             log.info("User info before update: " + user.toString());
             return "update_user";
@@ -65,6 +69,7 @@ public class UserController {
 
     @PostMapping("/saveUser")
     public String saveUser(@ModelAttribute("user") User user){
+        //Save user to db
         userService.saveUser(user);
         log.info("User info after update: " + user.toString());
         return "redirect:/profile";
