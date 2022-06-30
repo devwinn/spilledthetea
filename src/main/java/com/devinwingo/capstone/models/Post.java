@@ -1,17 +1,15 @@
 package com.devinwingo.capstone.models;
-
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.*;
-
+//POST MODEL
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
+@Builder
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -50,11 +48,13 @@ public class Post {
             inverseJoinColumns = @JoinColumn(name = "category_name"))
     List<Category> categories = new ArrayList<>();
 
+    //Helper Method
     public void addComment(Comment comment) {
         comments.add(comment);
         comment.setPost(this);
     }
 
+    //Helper Method
     public void addCategory(String catName) {
         Category newCategory = new Category();
         newCategory.setName(catName);
@@ -62,11 +62,12 @@ public class Post {
         newCategory.getPosts().add(this);
     }
 
+    //Helper Method needed to delete post due to FK CONSTRAINTS in Post_Categories Table
     public void deleteCategories() {
         this.getCategories().removeAll(this.getCategories());
     }
 
-
+    //Override Equals and Hashcode
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

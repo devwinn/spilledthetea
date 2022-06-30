@@ -47,26 +47,26 @@ public class AppSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+//        http
+//                .csrf().disable()
+//                .authorizeRequests()
+//                .anyRequest().permitAll()
+//                .and()
+//                .formLogin().loginPage("/login").usernameParameter("email").passwordParameter("password")
+//                .loginProcessingUrl("/login/processing").defaultSuccessUrl("/profile")
+//                .failureUrl("/login?error=true").permitAll();
+
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .anyRequest().permitAll()
+                .antMatchers("/")
+                .permitAll()
+                .antMatchers("/posts/**", "/leaveComment", "/saveComment", "/profile","/categories/**").authenticated()
+                .antMatchers("/admin", "/admin/**").hasAuthority("ROLE_ADMIN")
                 .and()
                 .formLogin().loginPage("/login").usernameParameter("email").passwordParameter("password")
                 .loginProcessingUrl("/login/processing").defaultSuccessUrl("/profile")
                 .failureUrl("/login?error=true").permitAll();
 
-//        http
-//                .csrf().disable()
-//                .authorizeRequests()
-//                .antMatchers("/")
-//                .permitAll()
-//                .antMatchers("/posts/**", "/leaveComment", "/saveComment", "/profile").authenticated()
-//                .antMatchers("/admin", "/admin/**").hasAuthority("ROLE_ADMIN")
-//                .and()
-//                .formLogin().loginPage("/login").usernameParameter("email").passwordParameter("password")
-//                .loginProcessingUrl("/login/processing").defaultSuccessUrl("/profile")
-//                .failureUrl("/login?error=true").permitAll();
-//
     }
 }

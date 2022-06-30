@@ -14,7 +14,7 @@
             <div class="card mb-4">
                 <div class="card-header"><h4>Category: <span th:text="${category.name}"></span></h4></div>
                 <!-- Blog posts-->
-                <div class="card-body" th:each="post: ${posts}">
+                <div class="card-body" th:each="post: ${posts}" style="border-bottom: 2px solid grey;">
                     <h2 class="card-title h5" th:text="${post.heading}"></h2>
                     <div class="small text-muted" th:text="${post.user.userName}"></div>
                     <br>
