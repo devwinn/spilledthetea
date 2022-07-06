@@ -50,7 +50,6 @@ public class PostController {
     //postmapping for post creation
     @PostMapping("/savepost")
     public String createPost(@ModelAttribute("post") Post post, Principal principal) {
-       //for testing user is hardcoded
         log.info(post.toString());
         if(principal != null) {
             Optional<User> optional = userService.getByUserName(principal.getName());

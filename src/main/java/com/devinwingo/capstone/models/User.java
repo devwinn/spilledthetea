@@ -22,12 +22,12 @@ import java.util.Objects;
 @Entity
 public class User {
     @Id
-    @NotEmpty(message = "Please Enter Your Email")
+    @NotEmpty
     @Email
     @Column(name = "email", unique = true)
     String email;
 
-    @NotEmpty(message = "Please Enter Your User Name")
+    @NotEmpty
     @Length(message = "User Name Must Be 6 Or More Characters", min = 6)
     @Column(name = "user_name", unique = true)
     String userName;

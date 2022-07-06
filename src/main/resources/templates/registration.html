@@ -11,20 +11,26 @@
                 <h2>Create Account</h2>
                 <br><br>
                 <form action="#" th:action="@{/register/save}" th:object="${user}" method="POST">
-                    <input type="email" th:field="*{email}"
+                    <label for="email">Email</label>
+                    <input type="email" th:field="*{email}" id="email"
                     placeholder="Email" class="form-control mb-4 col-4" required>
 
-                    <input type="text" th:field="*{password}"
+                    <label for="password">Password</label>
+                    <input type="text" th:field="*{password}" id="password"
                     placeholder="Password" class="form-control mb-4 col-4" required minlength="8">
 
-                    <input type="text" th:field="*{userName}"
+                    <label for="username">User Name</label>
+                    <input type="text" th:field="*{userName}" id="username"
                     placeholder="User Name" class="form-control mb-4 col-4" required minlength="6">
 
-                    <input type="text" th:field="*{firstName}"
+                    <label for="firstname">First Name</label>
+                    <input type="text" th:field="*{firstName}" id="firstname"
                     placeholder="First Name" class="form-control mb-4 col-4" required>
 
-                    <input type="text" th:field="*{lastName}"
+                    <label for="lastname">Last Name</label>
+                    <input type="text" th:field="*{lastName}" id="lastname"
                     placeholder="Last Name" class="form-control mb-4 col-4" required>
+
 
                     <button type="submit" class="btn btn-primary">Save User</button>
                 </form>

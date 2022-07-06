@@ -7,25 +7,33 @@
         <div th:replace="fragments/header :: header"/>
         <div class="container" style="min-height: 80vh; font-family: 'Raleway', sans-serif;">
             <div class="row">
-                <h1 class="bg-light">Users</h1>
+                <h1 class="bg-light">Admin</h1>
                 <hr>
                 <h2>Create User</h2>
+                <br>
 
                 <form action="#" th:action="@{/admin/saveUser}" th:object="${user}" method="POST">
-                    <input type="text" th:field="*{email}"
+
+                    <label class="form-label" for="email">Email</label>
+                    <input type="text" th:field="*{email}" id="email"
                            placeholder="Email" class="form-control mb-4 col-4">
 
-                    <input type="text" th:field="*{password}"
+                    <label class="form-label" for="password">Password</label>
+                    <input type="text" th:field="*{password}" id="password"
                            placeholder="Password" class="form-control mb-4 col-4">
 
-                    <input type="text" th:field="*{userName}"
+                    <label class="form-label" for="username">User Name</label>
+                    <input type="text" th:field="*{userName}" id="username"
                            placeholder="User Name" class="form-control mb-4 col-4">
 
-                    <input type="text" th:field="*{firstName}"
+                    <label class="form-label" for="firstname">First Name</label>
+                    <input type="text" th:field="*{firstName}" id="firstname"
                            placeholder="First Name" class="form-control mb-4 col-4">
 
-                    <input type="text" th:field="*{lastName}"
+                    <label class="form-label" for="lastname">Last Name</label>
+                    <input type="text" th:field="*{lastName}" id="lastname"
                            placeholder="Last Name" class="form-control mb-4 col-4">
+
 
                     <button type="submit" class="btn btn-primary col-2">Save User</button>
                 </form>
