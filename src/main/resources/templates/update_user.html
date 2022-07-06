@@ -9,30 +9,32 @@
 
         <div class="container" style="min-height: 80vh; font-family: 'Raleway', sans-serif;">
             <div class="row">
-                <h2>Update</h2><br> <br>
+                <h2>Update</h2><br> <br> <br>
 
                 <form action="#" th:action="@{/profile/saveUser}" th:object="${user}" method="POST">
                     <input type="hidden" th:field="*{email}"
                     class="form-control mb-4 col-4" required>
-                    <h5 th:text="${user.email}"></h5>
+                    <label class="form-label">Email</label>
+                    <h5 th:text="${user.email}"></h5> <br>
 
-                    <label for="password" style="color:red;">Please delete placeholder and re-enter/create new password</label>
+                    <label class="form-label" for="password">Password</label>
+                    <label for="password" style="color:red;">(Please delete placeholder and re-enter/create new password)</label>
+
                     <input type="text" th:field="*{password}"
                     id="password" placeholder="Enter Password" class="form-control mb-4 col-4" required minlength="8">
-                    <label class="form-label" for="password">Password</label>
 
+
+                    <label for="username">User Name</label>
                     <input type="text" th:field="*{userName}"
                     id="username" th:placeholder="${user.userName}" class="form-control mb-4 col-4" required minlength="6">
-                    <label for="username">User Name</label>
 
+                    <label for="firstname">First Name</label>
                     <input type="text" th:field="*{firstName}"
                     id="firstname" th:placeholder="${user.firstName}" class="form-control mb-4 col-4" required>
-                    <label for="firstname">First Name</label>
 
+                    <label for="lastname">Last Name</label>
                     <input type="text" th:field="*{lastName}"
                     id="lastname" th:placeholder="${user.lastName}" class="form-control mb-4 col-4" required>
-                    <label for="lastname">Last Name</label>
-
 
                     <button type="submit" class="btn btn-primary">Save User</button>
                     <a th:href="@{/profile}" class="btn btn-primary">Back To My Posts</a>

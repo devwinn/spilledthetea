@@ -7,10 +7,8 @@
         <div th:replace="fragments/header :: header"/>
         <div class="container" style="min-height: 80vh; font-family: 'Raleway', sans-serif;">
             <div class="row">
-                <h1 class="bg-light">Admin</h1>
-                <hr>
                 <h2>Create User</h2>
-                <br>
+                <br><br>
 
                 <form action="#" th:action="@{/admin/saveUser}" th:object="${user}" method="POST">
 

@@ -47,6 +47,7 @@ public class AppSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
 //        http
 //                .csrf().disable()
 //                .authorizeRequests()
@@ -61,7 +62,7 @@ public class AppSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/")
                 .permitAll()
-                .antMatchers("/posts/**", "/leaveComment", "/saveComment", "/profile","/categories/**").authenticated()
+                .antMatchers("/posts/**", "/leaveComment", "/saveComment", "/profile", "/profile/**","/categories/**").authenticated()
                 .antMatchers("/admin", "/admin/**").hasAuthority("ROLE_ADMIN")
                 .and()
                 .formLogin().loginPage("/login").usernameParameter("email").passwordParameter("password")
